@@ -14,7 +14,7 @@ jobs:
     name: Editor (target=release_debug, tools=yes)
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # Upload cache on completion and check it out now
       - name: Load .scons_cache directory
@@ -31,7 +31,7 @@ jobs:
 
       # Use python 3.x release (works cross platform; best to keep self contained in it's own step)
       - name: Set up Python 3.x
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           # Semantic version range syntax or exact version of a Python version
           python-version: '3.x'
@@ -65,7 +65,7 @@ jobs:
     name: Template (target=release, tools=no)
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # Upload cache on completion and check it out now
       - name: Load .scons_cache directory
@@ -82,7 +82,7 @@ jobs:
 
       # Use python 3.x release (works cross platform)
       - name: Set up Python 3.x
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           # Semantic version range syntax or exact version of a Python version
           python-version: '3.x'
@@ -104,8 +104,8 @@ jobs:
           scons target=release tools=no
           ls -l bin/
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.job }}
+          name: macos-redot-${{ matrix.runs-on }}
           path: bin/*
           retention-days: 14
